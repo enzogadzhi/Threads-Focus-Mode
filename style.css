@@ -1,0 +1,53 @@
+/* =========================================================
+   策略：L型遮罩 + 極限貼合版
+   高度：175px (緊貼發文框下緣)
+   ========================================================= */
+
+/* 1. 【鎖定捲軸】禁止滑動 */
+body,
+html {
+    overflow: hidden !important;
+}
+
+/* 2. 【建立遮罩】 */
+body::after {
+    content: "2026!!!LP740。";
+
+    /* 固定定位 */
+    position: fixed;
+
+    /* --- 關鍵修改：往上移到 130px --- */
+    top: 130px;
+
+    /* 左邊留白給選單 */
+    left: 80px;
+
+    /* 填滿剩下的右邊和下面 */
+    right: 0;
+    bottom: 0;
+
+    /* 樣式 */
+    background-color: var(--background-primary, #101010);
+    z-index: 9999;
+
+    /* 排版 */
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+    font-size: 32px;
+    font-weight: 900;
+    color: #444;
+    pointer-events: auto;
+    /* 攔截滑鼠 */
+}
+
+/* 3. 【隱藏載入動畫】 */
+svg[aria-label*="Loading"] {
+    display: none !important;
+}
+
+/* 4. 【發文時自動隱藏黑布】 */
+body:has(div[role="dialog"])::after,
+body:has(div[role="menu"])::after {
+    display: none !important;
+}
